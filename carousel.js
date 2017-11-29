@@ -11,7 +11,7 @@ define(['jquery'], function ($) {
                 $bullet = this.$bullet = this.$ct.find('.bullet');
             var $first = this.$imgCt.find('li').first(),
                 $last = this.$imgCt.find('li').last();
-            var $width = this.$width = $first.width()
+            var $width = this.$width = this.$ct.width()
             this.pageIndex = 0;
             this.imgCount = $imgCt.children().length
             $imgCt.prepend($last.clone())
@@ -30,21 +30,23 @@ define(['jquery'], function ($) {
         },
         play: function (length) {
             var _this = this;
-            var $width = this.$ct.width()
-            this.$imgCt.width($width * (this.imgCount + 2))
+            this.length = length;
+            // var $width = this.$ct.width()
+            // this.$imgCt.width($width * (this.imgCount + 2))
+            this.check(this.length);
             this.$imgCt.animate({
-                left : -(_this.pageIndex+length+1) * $width
+                left: -(_this.pageIndex + length + 1) * _this.$width
             }, function () {
                 _this.pageIndex += length;
                 if (_this.pageIndex === _this.imgCount) {
                     _this.pageIndex = 0;
                     _this.$imgCt.css({
-                        left: -$width
+                        left: -_this.$width
                     })
                 } else if (_this.pageIndex < 0) {
                     _this.pageIndex = _this.imgCount - 1;
                     _this.$imgCt.css({
-                        left: -_this.imgCount * $width
+                        left: -_this.imgCount * _this.$width
                     })
                 }
                 _this.setBullet()
@@ -55,7 +57,17 @@ define(['jquery'], function ($) {
         },
         autoPlay: function () {
             var _this = this
-            var clock = setInterval(function () { _this.play(1) }, 2000);
+            this.clock = setInterval(function () { _this.play(1) }, 2000);
+        },
+        check: function (length) {
+            var _this = this
+            $(window).resize(function () {
+                _this.$width = _this.$ct.width()
+                _this.$imgCt.width(_this.$width * (_this.imgCount + 2));
+                _this.$imgCt.css({
+                    left: -(_this.pageIndex + length) * _this.$width
+                })
+            })
         }
     }
     return { Create: Carousel }
