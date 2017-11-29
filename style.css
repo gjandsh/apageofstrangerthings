@@ -38,7 +38,7 @@ a {
   height: 1030vh;
   position: relative;
   margin: 30px auto;
-  overflow: hidden;  
+  overflow: hidden;   
   box-shadow: 0 0 5px;
   margin-top:0;
   margin-right:0;
@@ -80,7 +80,7 @@ a {
   background-size: cover;
 }
 .img-ct li:nth-child(7){
-  background-image: url(https://i.loli.net/2017/11/29/5a1e7aaf306fc.jpg);
+  background-image: url(https://i.loli.net/2017/11/29/5a1e7cbee9850.jpg);
   background-size: cover;
 }
 @media(min-width:350px) {
