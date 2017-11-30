@@ -24,7 +24,7 @@ define(['jquery'], function ($) {
                 e.preventDefault();
                 _this.isLoad = true;
                 $('.load-more a').text('Loading...')
-                $.get('/loadMore.json').done(function (res) {
+                $.get('./loadMore.json').done(function (res) {
                     for (i = 0; i < res.url.length; i++) {
                         _this.imgarr.push(res.url[i])
                         _this.titlearr.push(res.title[i])
