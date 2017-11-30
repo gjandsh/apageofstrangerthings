@@ -3,7 +3,7 @@ require.config({
         "jquery": "jquery.min",
         "carousel": "carousel",
         "goTop": "goTop",
-        "loadMore": "lodaMore"
+        "loadMore": "loadMore"
     }
 });
 requirejs(['jquery', 'carousel','goTop','loadMore'], function ($, carousel,goTop,loadMore) {

@@ -7,19 +7,23 @@ define(['jquery'], function ($) {
     LoadMore.prototype = {
         init: function () {
             var _this = this;
-            this.imgarr = [];
-            this.titlearr = [];
-            this.contentarr = [];
             this.page = 1;
             this.isLoad = false;
-            this.columnHeight = [$('#column1').height(), $('#column2').height(), $('#column2').height()]
+            var height1 = $('#column1').children().last().offset().top+$('#column1').children().last().height()
+            var height2 = $('#column2').children().last().offset().top+$('#column1').children().last().height()
+            var height3 = $('#column3').children().last().offset().top+$('#column1').children().last().height()
+            this.columnHeight = [height1, height2, height3];
             $('.get-back').hide()
         },
         bind: function () {
             var _this = this;
-            $('.load-more').one('click', function () {
+            this.imgarr = [];
+            this.titlearr = [];
+            this.contentarr = [];
+            $('.load-more').one('click', function (e) {
+                e.preventDefault();
                 _this.isLoad = true;
-                $('.load-more').text('Loading...')
+                $('.load-more a').text('Loading...')
                 $.get('/loadMore.json').done(function (res) {
                     for (i = 0; i < res.url.length; i++) {
                         _this.imgarr.push(res.url[i])
@@ -29,23 +33,26 @@ define(['jquery'], function ($) {
                     _this.isLoad = false;
                     _this.getpages(_this.page)
                     $('.get-back').fadeIn(500);
-                    $('.load-more').on('click', function () {
+                    $('.load-more').on('click', function (e) {
+                        e.preventDefault();
                         $('.get-back').fadeIn(500);
-                        $('.load-more').text('Loading...')
+                        $('.load-more a').text('Loading...')
                         _this.getpages(_this.page)
                     })
-                    $('.get-back').on('click', function () {
+                    $('.get-back').on('click', function (e) {
+                        e.preventDefault();
                         if (_this.isLoad) { return }
-                        $('.loaded').slideUp(1000, function () { $('.loaded').remove() })
-                        _this.page = 1;
+                        $('.loaded').parents('.portfolio-content').fadeOut(500,
+                            function () { $('.loaded').parents('.portfolio-content').remove() })
+                        _this.init()
                         $('.get-back').hide()
-                        $('.load-more').text('loadmore')
+                        $('.load-more a').text('loadmore')
                     })
                 })
             })
         },
         getImages: function (page, fun) {
-            var _this = this
+            var _this = this;
             fun(_this.imgarr.slice((page - 1) * 3, page * 3),
                 _this.titlearr.slice((page - 1) * 3, page * 3),
                 _this.contentarr.slice((page - 1) * 3, page * 3))
@@ -65,7 +72,7 @@ define(['jquery'], function ($) {
             var htmls = '';
             htmls += '<div class="portfolio-content">';
             htmls += '<div class="portfolio-link">';
-            // htmls += '<img class = "loaded" src='+this.imags[n]+'>';
+            // htmls += '<img class = "loaded" src=' + this.images[n] + '>';
             htmls += '<div class="portfolio-hover">';
             htmls += '<div class="portfolio-hover-content">';
             htmls += '<i class="iconfont icon-icon1"></i>';
@@ -79,7 +86,7 @@ define(['jquery'], function ($) {
             var $image = $('<img class="loaded">')
             var _this = this
             $image.attr('src', this.images[n])
-            this.ct.eq(index).find('portfolio-link').prepend($image)
+            this.$ct.eq(index).find('.portfolio-link').last().prepend($image)
             $image.load(function () {
                 _this.columnHeight[index] += $image.parents('.portfolio-content').height()
                 _this.count += 1
@@ -93,10 +100,10 @@ define(['jquery'], function ($) {
                 this.isLoad = true
             } else {
                 this.isLoad = false;
-                $('.load-more').text('Load More');
+                $('.load-more a').text('Load More');
                 this.page += 1;
                 if (!this.imgarr[(this.page - 1) * 3]) {
-                    $('.load-more').text('no more')
+                    $('.load-more a').text('No More')
                 }
             } //当该页没有下一张时，isLoad=false
         },
@@ -106,9 +113,10 @@ define(['jquery'], function ($) {
                 if (this.columnHeight[min] > this.columnHeight[i])
                     min = i
             }
+            // console.log(min)
             return min
         }
     }
-    return {Creat: LoadMore}
+    return { Creat: LoadMore }
 })
 
