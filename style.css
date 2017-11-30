@@ -284,11 +284,12 @@ header h1 {
 }
 .portfolio-container {
   margin:0 auto;
-  display: flex; 
+  /* display: flex; 
   justify-content:center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 .portfolio-content-wrap{
+  float:left;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -332,7 +333,7 @@ header h1 {
   transition: all ease .5s;
 }
 .portfolio-context {
-  padding: 25px;
+  padding:25px;
 }
 .portfolio-context h4{
   margin: 0;
@@ -362,6 +363,13 @@ header h1 {
   .portfolio-link img {
   max-width:100%
   }
+}
+.load-btn{
+  text-align: center;
+}
+.load-more,.get-back{
+  display:inline-block;
+  margin:20px 20px 0 0;
 }
 /* about */
 #about {

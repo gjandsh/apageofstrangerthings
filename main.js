@@ -2,10 +2,11 @@ require.config({
     paths: {
         "jquery": "jquery.min",
         "carousel": "carousel",
-        "goTop": "goTop"
+        "goTop": "goTop",
+        "loadMore": "lodaMore"
     }
 });
-requirejs(['jquery', 'carousel','goTop'], function ($, carousel,goTop) {
+requirejs(['jquery', 'carousel','goTop','loadMore'], function ($, carousel,goTop,loadMore) {
     new carousel.Create($('.carousel'));
     $('#navbar').on('click', 'a', function (event) {
         event.preventDefault();
@@ -14,4 +15,5 @@ requirejs(['jquery', 'carousel','goTop'], function ($, carousel,goTop) {
         }, 500);
     })
     new goTop.Create($('body'))
+    new loadMore.Creat($('.portfolio-content-wrap'))
 })
