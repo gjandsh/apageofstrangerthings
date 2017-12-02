@@ -1,0 +1,53 @@
+{
+  "name": "stranger-things",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd build&&server start",
+    "reset": "rm -rf build/ && mkdir build",
+    "css": "postcss ./src/*.css -d build",
+    "images": "imagemin ./src/images/* --out-dir=build/images",
+    "static-files": "cp ./src/*.html build/ && cp ./src/*.json build/ && cp ./src/jquery.min.js build/ && cp ./src/require.js build/ && cp ./src/router.js build/",
+    "js": "uglifyjs ./src/main.js > build/main.js && uglifyjs ./src/carousel.js > build/carousel.js && uglifyjs ./src/goTop.js > build/goTop.js && uglifyjs ./src/loadMore.js > build/loadMore.js",
+    "build": "npm run reset && npm run css &&npm run images&& npm run static-files && npm run js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gjandsh/apageofstrangerthings.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gjandsh/apageofstrangerthings/issues"
+  },
+  "homepage": "https://github.com/gjandsh/apageofstrangerthings#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^7.1.6",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "cssnano": "^3.10.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-coffee": "^2.3.5",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-requirejs": "^1.0.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "gulp-webpack": "^1.5.0",
+    "imagemin-cli": "^3.0.0",
+    "postcss": "^6.0.14",
+    "uglify-es": "^3.2.0",
+    "uglify-js": "^3.2.0",
+    "webpack": "^3.9.1"
+  }
+}

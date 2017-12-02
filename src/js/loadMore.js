@@ -25,7 +25,7 @@ define(['jquery'], function ($) {
                 _this.isLoad = true;
                 $('.load-more a').text('Loading...')
                 $.get('./loadMore.json').done(function (res) {
-                    for (i = 0; i < res.url.length; i++) {
+                    for (var i = 0; i < res.url.length; i++) {
                         _this.imgarr.push(res.url[i])
                         _this.titlearr.push(res.title[i])
                         _this.contentarr.push(res.content[i]);
@@ -109,7 +109,7 @@ define(['jquery'], function ($) {
         },
         getShortest: function () {
             var min = 0
-            for (i = 0; i < this.columnHeight.length; i++) {
+            for (var i = 0; i < this.columnHeight.length; i++) {
                 if (this.columnHeight[min] > this.columnHeight[i])
                     min = i
             }
