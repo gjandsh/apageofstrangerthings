@@ -7,10 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd build&&server start",
     "reset": "rm -rf build/ && mkdir build",
-    "css": "postcss ./src/*.css -d build",
+    "css": "postcss ./src/style/*.css -d build",
     "images": "imagemin ./src/images/* --out-dir=build/images",
-    "static-files": "cp ./src/*.html build/ && cp ./src/*.json build/ && cp ./src/jquery.min.js build/ && cp ./src/require.js build/ && cp ./src/router.js build/",
-    "js": "uglifyjs ./src/main.js > build/main.js && uglifyjs ./src/carousel.js > build/carousel.js && uglifyjs ./src/goTop.js > build/goTop.js && uglifyjs ./src/loadMore.js > build/loadMore.js",
+    "static-files": "cp ./src/static/*.html build/ && cp ./src/static/*.json build/ && cp ./src/static/jquery.min.js build/ && cp ./src/static/require.js build/ && cp ./src/static/router.js build/",
+    "js": "uglifyjs ./src/js/main.js > build/main.js && uglifyjs ./src/js/carousel.js > build/carousel.js && uglifyjs ./src/js/goTop.js > build/goTop.js && uglifyjs ./src/js/loadMore.js > build/loadMore.js",
     "build": "npm run reset && npm run css &&npm run images&& npm run static-files && npm run js"
   },
   "repository": {
