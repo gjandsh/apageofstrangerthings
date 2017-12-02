@@ -6,7 +6,6 @@ const babel = require('gulp-babel');
 var postcss = require('gulp-postcss'); 
 var autoprefixer = require('autoprefixer');
 let cleanCSS = require('gulp-clean-css');
-var requirejs = require('gulp-requirejs');
 
 gulp.task('reset', function() {
     return del(['build']);
